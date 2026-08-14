@@ -1,0 +1,73 @@
+/* =========================================================================
+   纸境 Inkwell — 首页定制样式（仅首页生效）
+   -------------------------------------------------------------------------
+   本文件只定制【首页】（body 含 .ikw-first-screen 时）：
+   1. 顶部导航：hero 玻璃拟态（毛玻璃 + 柔和渐变 + 阴影）；
+      首页首屏顶部全透明，滚动后自动转为玻璃。
+   2. 首页背景层 .ikw-page-bg：固定全屏、cover 铺满、尺寸下限约束。
+   除首页外，其他页面（文章/归档/分类/标签/关于等）完全保持 Matery 原版
+   样式（原版导航、原版 .bg-color 渐变页脚、原版正文渲染），本文件不做覆盖。
+   ========================================================================= */
+
+/* ---- 1. 首页背景层（仅首页渲染，见 layout.ejs） ---- */
+/* 固定全屏背景层：置于内容之下（z-index:-2）、不拦截指针事件，背景图 cover 铺满。
+   尺寸下限约束：不小于视口（水平方向至少覆盖整个视口宽度），缩放等比不露边。 */
+.ikw-page-bg {
+  position: fixed;
+  inset: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  transform-origin: center center;
+  z-index: -2;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* ---- 2. 首页顶部导航：hero 玻璃拟态（仅首页） ---- */
+body:has(.ikw-first-screen) header #headNav {
+  /* 柔和渐变（上深下浅）+ 高透明，替代 Matery 默认绿色渐变实色 */
+  background-image: linear-gradient(180deg,
+    rgba(26, 22, 40, 0.55),
+    rgba(26, 22, 40, 0.32)) !important;
+  background-color: rgba(26, 22, 40, 0.32) !important;
+  /* 毛玻璃 */
+  backdrop-filter: blur(16px) saturate(1.5);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  /* 顶部细高光 + 底部弥散阴影 */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 28px rgba(0, 0, 0, 0.20);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  opacity: 1 !important;                 /* 抵消 dark.css .bg-color 的 opacity:.8 */
+  transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* 暗色模式：更深更实的玻璃，保证白字对比度（仅首页） */
+body.DarkMode:has(.ikw-first-screen) header #headNav {
+  background-image: linear-gradient(180deg,
+    rgba(16, 16, 18, 0.60),
+    rgba(16, 16, 18, 0.40)) !important;
+  background-color: rgba(16, 16, 18, 0.40) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 28px rgba(0, 0, 0, 0.35);
+  border-bottom-color: rgba(255, 255, 255, 0.07);
+}
+
+/* 首页首屏：顶部保持全透明（首屏自身为深色壁纸），滚动后自动转为玻璃 */
+body:has(.ikw-first-screen) header #headNav.nav-transparent {
+  background: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom-color: transparent !important;
+}
+
+/* 玻璃底上的文字：保持白色并加轻微阴影，滚动时依然清晰（仅首页） */
+body:has(.ikw-first-screen) header #headNav .brand-logo a,
+body:has(.ikw-first-screen) header #headNav nav ul a {
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
