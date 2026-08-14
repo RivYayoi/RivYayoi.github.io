@@ -1,0 +1,153 @@
+/* ============================================================
+   代码高亮配色（highlight.js token 类）
+   依赖：Hexo 构建期 highlight.js（_config.yml: syntax_highlighter=highlight.js）
+   说明：本 Hexo 版本对 token 输出「裸类名」（如 .keyword 而非 .hljs-keyword），
+   故此处直接针对裸类名上色，并严格限定在代码块容器内，避免与博客其它
+   .title / .type / .operator 等通用类冲突。代码块外壳（语言栏/复制/折叠/行号/
+   响应式）见 code-block.css。
+   配色采用 GitHub Light / GitHub Dark 思路，适配本博客浅色与深色模式。
+   ============================================================ */
+
+/* 作用域：仅代码块内部生效（highlight.js 表格布局 / Prism / Shiki） */
+figure.highlight,
+figure.highlight pre,
+figure.highlight pre code,
+pre[class*="language-"],
+pre.shiki {
+  color: #24292e;
+  background: transparent;
+}
+
+/* ---------- 浅色主题 token 配色 ---------- */
+figure.highlight .comment,
+figure.highlight .quote,
+pre[class*="language-"] .comment,
+pre[class*="language-"] .quote,
+pre.shiki .comment {
+  color: #6a737d;
+  font-style: italic;
+}
+figure.highlight .keyword,
+figure.highlight .selector-tag,
+figure.highlight .literal,
+figure.highlight .name,
+figure.highlight .tag,
+pre[class*="language-"] .keyword,
+pre[class*="language-"] .tag {
+  color: #d73a49;
+}
+figure.highlight .string,
+figure.highlight .regexp,
+figure.highlight .symbol,
+figure.highlight .meta,
+figure.highlight .link,
+pre[class*="language-"] .string {
+  color: #032f62;
+}
+figure.highlight .title,
+figure.highlight .function_,
+figure.highlight .class_,
+figure.highlight .section,
+figure.highlight .built_in,
+figure.highlight .builtin-name,
+pre[class*="language-"] .title {
+  color: #6f42c1;
+}
+figure.highlight .number,
+figure.highlight .bullet,
+figure.highlight .attr,
+figure.highlight .variable,
+figure.highlight .operator,
+figure.highlight .params,
+figure.highlight .selector-class,
+figure.highlight .selector-attr,
+figure.highlight .selector-pseudo,
+figure.highlight .template-variable,
+figure.highlight .type,
+pre[class*="language-"] .number,
+pre[class*="language-"] .attr {
+  color: #005cc5;
+}
+figure.highlight .attribute,
+pre[class*="language-"] .attribute {
+  color: #005cc5;
+}
+figure.highlight .emphasis {
+  font-style: italic;
+}
+figure.highlight .strong {
+  font-weight: 700;
+}
+figure.highlight .deletion {
+  color: #b31d28;
+  background: #ffeef0;
+}
+figure.highlight .addition {
+  color: #22863a;
+  background: #f0fff4;
+}
+
+/* ---------- 深色模式（body.DarkMode） ---------- */
+body.DarkMode figure.highlight,
+body.DarkMode pre[class*="language-"],
+body.DarkMode pre.shiki {
+  color: #e6edf3;
+}
+body.DarkMode figure.highlight .comment,
+body.DarkMode figure.highlight .quote,
+body.DarkMode pre[class*="language-"] .comment {
+  color: #8b949e;
+}
+body.DarkMode figure.highlight .keyword,
+body.DarkMode figure.highlight .selector-tag,
+body.DarkMode figure.highlight .literal,
+body.DarkMode figure.highlight .name,
+body.DarkMode figure.highlight .tag,
+body.DarkMode pre[class*="language-"] .keyword,
+body.DarkMode pre[class*="language-"] .tag {
+  color: #ff7b72;
+}
+body.DarkMode figure.highlight .string,
+body.DarkMode figure.highlight .regexp,
+body.DarkMode figure.highlight .symbol,
+body.DarkMode figure.highlight .meta,
+body.DarkMode figure.highlight .link,
+body.DarkMode pre[class*="language-"] .string {
+  color: #a5d6ff;
+}
+body.DarkMode figure.highlight .title,
+body.DarkMode figure.highlight .function_,
+body.DarkMode figure.highlight .class_,
+body.DarkMode figure.highlight .section,
+body.DarkMode figure.highlight .built_in,
+body.DarkMode figure.highlight .builtin-name,
+body.DarkMode pre[class*="language-"] .title {
+  color: #d2a8ff;
+}
+body.DarkMode figure.highlight .number,
+body.DarkMode figure.highlight .bullet,
+body.DarkMode figure.highlight .attr,
+body.DarkMode figure.highlight .variable,
+body.DarkMode figure.highlight .operator,
+body.DarkMode figure.highlight .params,
+body.DarkMode figure.highlight .selector-class,
+body.DarkMode figure.highlight .selector-attr,
+body.DarkMode figure.highlight .selector-pseudo,
+body.DarkMode figure.highlight .template-variable,
+body.DarkMode figure.highlight .type,
+body.DarkMode pre[class*="language-"] .number,
+body.DarkMode pre[class*="language-"] .attr {
+  color: #79c0ff;
+}
+body.DarkMode figure.highlight .attribute,
+body.DarkMode pre[class*="language-"] .attribute {
+  color: #79c0ff;
+}
+body.DarkMode figure.highlight .deletion {
+  color: #ffdcd7;
+  background: #67060c;
+}
+body.DarkMode figure.highlight .addition {
+  color: #aff5b4;
+  background: #033a16;
+}

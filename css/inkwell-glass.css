@@ -1,12 +1,11 @@
 /* =========================================================================
-   纸境 Inkwell — 首页定制样式（仅首页生效）
+   纸境 Inkwell — 透明 hero 玻璃导航（全站生效）
    -------------------------------------------------------------------------
-   本文件只定制【首页】（body 含 .ikw-first-screen 时）：
-   1. 顶部导航：hero 玻璃拟态（毛玻璃 + 柔和渐变 + 阴影）；
-      首页首屏顶部全透明，滚动后自动转为玻璃。
-   2. 首页背景层 .ikw-page-bg：固定全屏、cover 铺满、尺寸下限约束。
-   除首页外，其他页面（文章/归档/分类/标签/关于等）完全保持 Matery 原版
-   样式（原版导航、原版 .bg-color 渐变页脚、原版正文渲染），本文件不做覆盖。
+   1. 顶部导航：hero 透明玻璃拟态（毛玻璃 + 高透明度），替代 Matery 默认
+      绿色渐变实色。首屏顶部全透明（英雄图清晰透出），滚动后自动转为半透明
+      毛玻璃（仍保持通透质感，而非实色）。
+   2. 首页背景层 .ikw-page-bg：固定全屏、cover 铺满（仅首页渲染，见 layout.ejs）。
+   适用范围：所有页面（首页/文章/归档/分类/标签/关于等）统一为透明 hero 玻璃导航。
    ========================================================================= */
 
 /* ---- 1. 首页背景层（仅首页渲染，见 layout.ejs） ---- */
@@ -25,17 +24,14 @@
   background-repeat: no-repeat;
 }
 
-/* ---- 2. 首页顶部导航：hero 玻璃拟态（仅首页） ---- */
-body:has(.ikw-first-screen) header #headNav {
-  /* 柔和渐变（上深下浅）+ 高透明，替代 Matery 默认绿色渐变实色 */
-  background-image: linear-gradient(180deg,
-    rgba(26, 22, 40, 0.55),
-    rgba(26, 22, 40, 0.32)) !important;
-  background-color: rgba(26, 22, 40, 0.32) !important;
-  /* 毛玻璃 */
-  backdrop-filter: blur(16px) saturate(1.5);
-  -webkit-backdrop-filter: blur(16px) saturate(1.5);
-  /* 顶部细高光 + 底部弥散阴影 */
+/* ---- 2. 顶部导航：透明 hero 玻璃（全站） ---- */
+header #headNav {
+  /* 滚动后的半透明毛玻璃：高透明度 + 模糊，英雄图/正文透过玻璃可见，
+     深色微染 + 文字阴影保证白字在浅色正文上依然清晰 */
+  background-image: none !important;
+  background-color: rgba(15, 15, 24, 0.55) !important;
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
     0 8px 28px rgba(0, 0, 0, 0.20);
@@ -44,30 +40,58 @@ body:has(.ikw-first-screen) header #headNav {
   transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
-/* 暗色模式：更深更实的玻璃，保证白字对比度（仅首页） */
-body.DarkMode:has(.ikw-first-screen) header #headNav {
-  background-image: linear-gradient(180deg,
-    rgba(16, 16, 18, 0.60),
-    rgba(16, 16, 18, 0.40)) !important;
-  background-color: rgba(16, 16, 18, 0.40) !important;
+/* 暗色模式：更深一点的玻璃，保证白字对比度（全站） */
+body.DarkMode header #headNav {
+  background-color: rgba(10, 10, 14, 0.65) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
     0 8px 28px rgba(0, 0, 0, 0.35);
   border-bottom-color: rgba(255, 255, 255, 0.07);
 }
 
-/* 首页首屏：顶部保持全透明（首屏自身为深色壁纸），滚动后自动转为玻璃 */
-body:has(.ikw-first-screen) header #headNav.nav-transparent {
-  background: transparent !important;
+/* 首屏顶部：保持高透明度（英雄图清晰透出），仅留极轻深色微染 + 毛玻璃边，呈现 hero 风格；
+   极轻微染确保白色文字在浅色背景下也始终清晰可见 */
+header #headNav.nav-transparent {
+  background-color: rgba(0, 0, 0, 0.10) !important;
   background-image: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
   box-shadow: none !important;
   border-bottom-color: transparent !important;
 }
 
-/* 玻璃底上的文字：保持白色并加轻微阴影，滚动时依然清晰（仅首页） */
-body:has(.ikw-first-screen) header #headNav .brand-logo a,
-body:has(.ikw-first-screen) header #headNav nav ul a {
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+/* 玻璃底上的文字：保持白色并加轻微阴影，任何背景下都清晰（全站） */
+header #headNav .brand-logo a,
+header #headNav nav ul a,
+header #headNav .nav-wrapper a {
+  color: #fff !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.40);
+}
+
+/* ---- 3. 页脚与上方页面同色 ----
+   去掉品牌绿，页脚背景设为透明，直接透出 body 的页面底色
+   （浅色 #eaeaea / 深色 rgba(30,30,30)），与上方页面完全同色、不再有突兀色块。
+   同时把页脚文字从白色改为深色（浅色模式），保证在浅色底上可读。
+   仅保留一条极轻的顶边，用于区分页脚内容与正文。 */
+footer.page-footer {
+  position: relative;
+  background: transparent !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+footer.page-footer::before {
+  content: none !important;
+}
+footer.page-footer a,
+footer.page-footer .copy-right,
+footer.page-footer .white-color {
+  color: rgba(0, 0, 0, 0.6) !important;
+  text-shadow: none !important;
+}
+body.DarkMode footer.page-footer {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+body.DarkMode footer.page-footer a,
+body.DarkMode footer.page-footer .copy-right,
+body.DarkMode footer.page-footer .white-color {
+  color: rgba(255, 255, 255, 0.6) !important;
 }

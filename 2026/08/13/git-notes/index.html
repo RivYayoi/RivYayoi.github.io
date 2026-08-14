@@ -43,6 +43,10 @@
 <link rel="stylesheet" type="text/css" href="/css/inkwell-first-screen.css">
 <!-- 玻璃拟态：导航毛玻璃 + 页脚无缝衔接 -->
 <link rel="stylesheet" type="text/css" href="/css/inkwell-glass.css">
+<!-- 代码块增强：语言标识 + 复制按钮 + 折叠/展开 -->
+<link rel="stylesheet" type="text/css" href="/css/code-block.css">
+<!-- 代码高亮配色（highlight.js token 类） -->
+<link rel="stylesheet" type="text/css" href="/css/code-highlight.css">
 
 
 
@@ -406,7 +410,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    214
+                    251
                 </div>
                 
 
@@ -450,6 +454,11 @@
 
 <p>在多次拉取和推送之后终于恢复正常。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin main</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;safe&quot;</span><br><span class="line">git push origin main</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span>;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Hello World&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    sys.stdout.write(<span class="string">&quot;Hello World&quot;</span>)</span><br></pre></td></tr></table></figure>
+
 
 <p><strong>本次我对于 git 的理解从零到一，更上一层。</strong></p>
 
@@ -669,27 +678,6 @@
 
 
 
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
-
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
-
-
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
 
@@ -781,6 +769,8 @@
 
 
 
+
+
     
     
     <footer class="page-footer bg-color">
@@ -854,7 +844,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">397</span>
+                        class="white-color">434</span>
             
             
             
@@ -1064,6 +1054,9 @@ $(function () {
 
     <!-- 自定义首屏（设计稿移植）交互脚本 -->
     <script src="/js/inkwell-first-screen.js"></script>
+
+    <!-- 代码块增强：语言标识 + 复制按钮 + 折叠/展开（原生，无框架依赖） -->
+    <script src="/js/code-block.js" defer></script>
 
     
 

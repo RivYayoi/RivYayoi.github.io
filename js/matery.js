@@ -171,13 +171,13 @@ $(function () {
     $('.tooltipped').tooltip();
 });
 
-//黑夜模式提醒开启功能
-setTimeout(function () {
-    if ((new Date().getHours() >= 19 || new Date().getHours() < 7) && !$('body').hasClass('DarkMode')) {
-        let toastHTML = '<span style="color:#97b8b2;border-radius: 10px;>' + '<i class="fa fa-bellaria-hidden="true"></i>晚上使用深色模式阅读更好哦。(ﾟ▽ﾟ)</span>'
-        M.toast({ html: toastHTML })
-    }
-}, 2200);
+//黑夜模式提醒开启功能（已关闭：用户不需要晚间深色模式提醒）
+// setTimeout(function () {
+//     if ((new Date().getHours() >= 19 || new Date().getHours() < 7) && !$('body').hasClass('DarkMode')) {
+//         let toastHTML = '<span style="color:#97b8b2;border-radius: 10px;>' + '<i class="fa fa-bellaria-hidden="true"></i>晚上使用深色模式阅读更好哦。(ﾟ▽ﾟ)</span>'
+//         M.toast({ html: toastHTML })
+//     }
+// }, 2200);
 
 //黑夜模式判断
 if (localStorage.getItem('isDark') === '1') {
