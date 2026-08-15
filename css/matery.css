@@ -135,7 +135,7 @@ kbd {
     border-radius: 3px;
     border: 1px solid #b4b4b4;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 2px 1px 0 rgba(255, 255, 255, 0.6) inset;
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-family: Consolas, 'Fira Code', 'SFMono-Regular', Inconsolata, Monaco, 'Courier New', monospace;
     font-size: 0.9rem;
     font-weight: 600;
     background-color: #f8f8f8;
@@ -492,8 +492,8 @@ header .go-back i {
 }
 
 .bg-cover:after {
-    -webkit-animation: rainbow 60s infinite;
-    animation: rainbow 60s infinite;
+    background: linear-gradient(135deg, rgba(255, 143, 177, 0.75) 0%, rgba(255, 143, 177, 0.65) 100%);
+    background: -webkit-linear-gradient(135deg, rgba(255, 143, 177, 0.75) 0%, rgba(255, 143, 177, 0.65) 100%);
 }
 
 .bg-cover:before,
@@ -515,10 +515,13 @@ header .go-back i {
 }
 
 .bg-cover .title {
-    font-size: 4rem;
+    /* 字号随视口自适应，缩小上限确保单行完整显示不截断 */
+    font-size: clamp(1.5rem, 4vw, 4rem);
     line-height: 1.2em;
     margin-bottom: 20px;
     position: relative;
+    /* 强制单行显示 */
+    white-space: nowrap;
 }
 
 .bg-cover .description {
@@ -2239,8 +2242,8 @@ body.DarkMode .theme-btn:hover {
 
 code {
     padding: 1px 5px;
-    font-family: Inconsolata, Monaco, Consolas, 'Courier New', Courier, monospace;
-    /* font-size: 0.91rem; */
+    font-family: Consolas, 'Fira Code', 'SFMono-Regular', Inconsolata, Monaco, 'Courier New', monospace;
+    font-size: 0.91rem;
     color: #e96900;
     background-color: #f8f8f8;
     border-radius: 2px;
@@ -2251,17 +2254,6 @@ pre code {
     color: #e8eaf6;
     background-color: #272822;
 }
-
-pre[class*="language-"] {
-    padding: 1.2em;
-    margin: .5em 0;
-}
-
-code[class*="language-"],
-pre[class*="language-"] {
-    color: #e8eaf6;
-    white-space: pre-wrap !important;
-} */
 
 .line-numbers-rows {
     border-right-width: 0px !important;
@@ -2307,15 +2299,6 @@ pre::after {
     box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
 }
 
-code {
-    padding: 1px 5px;
-    font-family: Inconsolata, Monaco, Consolas, 'Courier New', Courier, monospace;
-    font-size: 0.91rem;
-    color: #e96900;
-    background-color: #f8f8f8;
-    border-radius: 2px;
-}
-
 .code_copy {
     position: absolute;
     top: 0.7rem;
@@ -2356,21 +2339,4 @@ code {
 
 .code-closed pre::before {
     height: 0px;
-}
-
-pre code {
-    padding: 0;
-    color: #e8eaf6;
-    background-color: #272822;
-}
-
-pre[class*="language-"] {
-    padding: 1.2em;
-    margin: .5em 0;
-}
-
-code[class*="language-"],
-pre[class*="language-"] {
-    color: #e8eaf6;
-    white-space: pre-wrap !important;
 }

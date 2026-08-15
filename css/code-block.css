@@ -1,21 +1,36 @@
 /* ============================================================
-   代码块统一增强样式（与 matery 主题观感一致，兼容浅色 / 深色）
+   代码块统一增强样式 — LightMindTheme 风格
    依赖：themes/matery/source/js/code-block.js
-   说明：本模块是站内「所有代码块功能」的唯一实现，取代主题原先的
-   codeBlockFuction / codeCopy / codeShrink / codeBLang 相关样式与脚本。
+   说明：深海军蓝代码块 + One Dark 语法高亮，始终深色。
    ============================================================ */
+
+:root {
+  --code-font: 'JetBrains Mono', 'JetBrainsMono NF', 'Fira Code', 'Cascadia Code', 'SF Mono', Consolas, 'Courier New', monospace;
+  --code-bg: #1e2330;
+  --code-bg-soft: #262c3a;
+  --code-bg-bar: #262c3a;
+  --code-bg-toggle: #262c3a;
+  --code-border: #3a4253;
+  --code-text: #c8cfd9;
+  --code-muted: #6b7488;
+  --code-accent: #7fbe92;
+  --code-accent-hover: #a8d4b6;
+  --code-success: #3fb950;
+  --code-error: #f85149;
+  --code-shadow: 0 2px 10px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
 
 /* ---------- 统一容器 ---------- */
 .code-block {
   position: relative;
   margin: 1.4em 0;
-  border: 1px solid rgba(125, 125, 125, 0.22);
-  border-radius: 0.5rem;
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
   overflow: hidden;
-  background: transparent;
+  background: var(--code-bg);
+  box-shadow: var(--code-shadow);
 }
 
-/* 复用 / 兼容主题产物：去除其自带的边距与圆点，交由本模块统一呈现 */
 .code-block figure.highlight,
 .code-block pre.shiki,
 .code-block pre[class*="language-"] {
@@ -25,8 +40,6 @@
   box-shadow: none !important;
 }
 
-/* 抑制主题强加的深色背景（#272822）与浅底色代码块，改由 .code-block__body
-   统一提供浅色/深色代码面板；基础文字色交由 code-highlight.css 按模式着色 */
 .code-block figure.highlight,
 .code-block figure.highlight table,
 .code-block figure.highlight tbody,
@@ -40,15 +53,13 @@
 .code-block pre[class*="language-"] code {
   background: transparent !important;
 }
-/* 代码基础文字色继承自 figure.highlight（浅色 #24292e / 深色 #e6edf3），
-   避免主题 pre code 的浅色文字压过我们的配色；token 类会另行覆盖 */
+
 .code-block figure.highlight pre code,
 .code-block pre.shiki code,
 .code-block pre[class*="language-"] code {
-  color: inherit !important;
+  color: var(--code-text) !important;
 }
 
-/* 抑制主题在 pre / .code-area 上绘制的重复 macOS 圆点，避免与头部圆点叠加 */
 .code-block pre::after,
 .code-block pre::before,
 .code-block pre::first-line,
@@ -57,37 +68,31 @@
   display: none !important;
 }
 
-/* 让代码区自身背景交给内部 pre（构建产物已着色），容器只负责边框与裁剪 */
 .code-block pre {
   margin: 0 !important;
-  padding: 1rem 1.1rem !important;
+  padding: 16px 14px !important;
   background: transparent !important;
   border-radius: 0 !important;
 }
 
-/* 统一代码字体（等宽 + 固定字号），避免继承外层容器的大字号导致块代码偏大 */
 .code-block pre,
-.code-block code {
-  font-family: 'Fira Code', 'JetBrains Mono', 'SFMono-Regular', Inconsolata, Monaco, Consolas, 'Courier New', monospace !important;
+.code-block pre *,
+.code-block code,
+.code-block code * {
+  font-family: var(--code-font) !important;
   font-size: 0.9rem !important;
-  line-height: 1.6 !important;
+  line-height: 1.62 !important;
+  font-feature-settings: "calt" 1, "liga" 1;
 }
 
-/* 兜底：构建产物本身（极端情况下未被 JS 包裹时）也强制统一字号与字体，
-   避免 <pre> 回退到继承的正文大字号，造成「部分代码字体偏大」 */
 figure.highlight pre,
-figure.highlight pre code,
-figure.highlight td.gutter pre,
-figure.highlight td.code pre {
-  font-family: 'Fira Code', 'JetBrains Mono', 'SFMono-Regular', Inconsolata, Monaco, Consolas, 'Courier New', monospace !important;
+figure.highlight pre * {
+  font-family: var(--code-font) !important;
   font-size: 0.9rem !important;
-  line-height: 1.6 !important;
+  line-height: 1.62 !important;
+  font-feature-settings: "calt" 1, "liga" 1;
 }
 
-/* 类名冲突兜底：highlight.js 输出的是裸 token 类名（.title/.meta/.name 等），
-   会与主题/Materialize 的通用标题/元信息类名撞名（如 matery.css 的
-   .title { font-size: 2rem }），导致个别 token（如 C++ 的 main）被放大。
-   强制代码区所有 span 继承代码字号，确保 token 级字体一致。 */
 figure.highlight td.code span,
 figure.highlight td.code code span,
 figure.highlight pre.shiki code span,
@@ -95,9 +100,6 @@ figure.highlight pre[class*="language-"] code span {
   font-size: inherit !important;
 }
 
-/* 代码块标题（Hexo {% codeblock %} 标签 / 带标题围栏块产生的 <figcaption>）：
-   统一为与代码一致的视觉尺度，避免标题直接继承正文大字号（16px），
-   造成「这些代码块字体比别的代码块大」的观感。低调处理，不抢眼。 */
 .code-block figcaption {
   display: block;
   padding: 0.3rem 1.1rem;
@@ -105,13 +107,12 @@ figure.highlight pre[class*="language-"] code span {
   line-height: 1.4;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: inherit;
+  color: var(--code-text);
   opacity: 0.6;
   user-select: none;
   font-family: inherit;
 }
 
-/* 增量兼容：主题自带 .code-area 被本模块接管时，抑制其重复绘制的 macOS 吗点 */
 .code-block--legacy::after {
   content: none !important;
   display: none !important;
@@ -123,8 +124,8 @@ figure.highlight pre[class*="language-"] code span {
   align-items: center;
   gap: 0.6rem;
   padding: 0.4rem 0.8rem;
-  background: rgba(125, 125, 125, 0.12);
-  border-bottom: 1px solid rgba(125, 125, 125, 0.18);
+  background: var(--code-bg-bar);
+  border-bottom: 1px solid var(--code-border);
   font-size: 0.8rem;
   line-height: 1.4;
 }
@@ -132,7 +133,8 @@ figure.highlight pre[class*="language-"] code span {
 .code-block__lang {
   font-weight: 600;
   letter-spacing: 0.02em;
-  opacity: 0.72;
+  color: var(--code-text);
+  opacity: 0.85;
   user-select: none;
   font-family: inherit;
   white-space: nowrap;
@@ -147,10 +149,10 @@ figure.highlight pre[class*="language-"] code span {
   margin-left: auto;
   padding: 0.4rem 0.8rem;
   min-height: 32px;
-  border: 1px solid rgba(125, 125, 125, 0.35);
+  border: 1px solid var(--code-border);
   border-radius: 6px;
   background: transparent;
-  color: inherit;
+  color: var(--code-text);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -158,37 +160,88 @@ figure.highlight pre[class*="language-"] code span {
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 .code-block__copy:hover {
-  border-color: #42b983;
-  color: #42b983;
+  border-color: var(--code-accent);
+  color: var(--code-accent);
 }
 .code-block__copy:focus-visible {
-  outline: 2px solid #42b983;
+  outline: 2px solid var(--code-accent);
   outline-offset: 2px;
 }
 .code-block__copy.is-copied {
-  color: #42b983;
-  border-color: #42b983;
+  color: var(--code-success);
+  border-color: var(--code-success);
 }
 .code-block__copy.is-error {
-  color: #ef5350;
-  border-color: #ef5350;
+  color: var(--code-error);
+  border-color: var(--code-error);
 }
 
 /* ---------- 代码主体：横滚 + 折叠 ---------- */
 .code-block__body {
   position: relative;
   max-height: none;
-  overflow: auto;
+  overflow: auto !important;
   -webkit-overflow-scrolling: touch;
-  background: #f6f8fa; /* 代码面板底色（浅色），与页面区分 */
+  background: var(--code-bg);
+  color: var(--code-text);
 }
 .code-block__body pre,
 .code-block__body code {
-  white-space: pre !important; /* 长行横向滚动，而非折行 */
+  white-space: pre !important;
 }
 .code-block__body.is-collapsed {
   max-height: 22em;
-  overflow: hidden;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+/* ---------- 滚动条：与代码块背景无缝衔接 ---------- */
+/* WebKit / Blink (Chrome, Edge, Safari) */
+.code-block__body::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+.code-block__body::-webkit-scrollbar-track {
+  background: var(--code-bg);
+  border: 0;
+}
+.code-block__body::-webkit-scrollbar-thumb {
+  background: var(--code-border);
+  border: 3px solid var(--code-bg);
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+.code-block__body::-webkit-scrollbar-thumb:hover {
+  background: #4e576d;
+}
+.code-block__body::-webkit-scrollbar-corner {
+  background: var(--code-bg);
+}
+/* 竖向滚动条与容器右侧衔接：确保没有缝隙 */
+.code-block__body::-webkit-scrollbar:vertical {
+  margin-right: -1px;
+}
+/* 横向滚动条与容器底部衔接：无间隙、颜色一致 */
+.code-block__body::-webkit-scrollbar:horizontal {
+  margin-bottom: -1px;
+}
+
+/* Firefox */
+.code-block__body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--code-border) var(--code-bg);
+}
+
+/* 深色模式下滚动条保持一致 */
+body.DarkMode .code-block__body::-webkit-scrollbar-track {
+  background: var(--code-bg);
+}
+body.DarkMode .code-block__body::-webkit-scrollbar-thumb {
+  background: var(--code-border);
+  border: 3px solid var(--code-bg);
+}
+body.DarkMode .code-block__body {
+  scrollbar-color: var(--code-border) var(--code-bg);
 }
 
 /* ---------- 折叠 / 展开 触发按钮 ---------- */
@@ -197,20 +250,27 @@ figure.highlight pre[class*="language-"] code span {
   width: 100%;
   padding: 0.5rem;
   border: 0;
-  border-top: 1px solid rgba(125, 125, 125, 0.18);
-  background: rgba(125, 125, 125, 0.06);
-  color: #42b983;
+  border-top: 1px solid var(--code-border);
+  background: var(--code-bg-toggle);
+  color: var(--code-muted);
   cursor: pointer;
   font: inherit;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  line-height: 1;
+  outline: 0 !important;
+  -webkit-tap-highlight-color: transparent;
 }
 .code-block__toggle[hidden] {
   display: none;
 }
-.code-block__toggle:hover { background: rgba(66, 185, 131, 0.12); }
-.code-block__toggle:focus-visible {
-  outline: 2px solid #42b983;
-  outline-offset: -2px;
+.code-block__toggle:hover,
+.code-block__toggle:focus,
+.code-block__toggle:focus-visible,
+.code-block__toggle:active {
+  background: var(--code-bg-toggle) !important;
+  color: var(--code-muted) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
 }
 
 /* ---------- 行号（构建产物未提供时补齐） ---------- */
@@ -228,7 +288,7 @@ figure.highlight pre[class*="language-"] code span {
   left: 0;
   width: 2.1em;
   text-align: right;
-  color: rgba(125, 125, 125, 0.6);
+  color: var(--code-muted);
   user-select: none;
 }
 .code-block--linenos-plain .code-block__line {
@@ -242,54 +302,111 @@ figure.highlight pre[class*="language-"] code span {
   left: 0;
   width: 2.3em;
   text-align: right;
-  color: rgba(125, 125, 125, 0.6);
+  color: var(--code-muted);
   user-select: none;
 }
 
-/* 行号列（td.gutter）：清理主题 .line-numbers 的夸张内边距/外边距，避免行号与代码错位 */
+/* 行号列（td.gutter）：强制覆盖主题默认的白色边框，与背景衔接 */
+/* 先清除所有 td/th/table 的多余边框（白线来源） */
+.code-block figure.highlight td,
+.code-block figure.highlight th,
+.code-block figure.highlight table {
+  border: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  border-left: 0 !important;
+  background: transparent !important;
+}
+.code-block figure.highlight td.code {
+  border-right: 0 !important;
+}
+.code-block figure.highlight td::before,
+.code-block figure.highlight td::after,
+.code-block figure.highlight tr::before,
+.code-block figure.highlight tr::after,
+.code-block figure.highlight table::before,
+.code-block figure.highlight table::after {
+  display: none !important;
+  content: none !important;
+  border: 0 !important;
+}
+
+/* 仅保留 td.gutter 的右分隔线，颜色与代码块边框一致（与深色背景衔接） */
+.code-block figure.highlight td.gutter,
 .code-block td.gutter {
-  padding: 0 0.9rem 0 0;
-  border-right: 1px solid rgba(125, 125, 125, 0.18);
+  padding: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  border-left: 0 !important;
+  border-right: 1px solid var(--code-border) !important;
   text-align: right;
   vertical-align: top;
   user-select: none;
-  width: 1%;
+  /* 固定列宽：4ch(数字区) + 1ch(右侧空格) + 0.35rem(左padding) */
+  width: calc(5ch + 0.35rem) !important;
+  min-width: calc(5ch + 0.35rem) !important;
+  max-width: calc(5ch + 0.35rem) !important;
   white-space: nowrap;
+  color: var(--code-muted);
+  background: transparent !important;
 }
 .code-block td.gutter pre,
 .code-block td.gutter pre.line-numbers {
   margin: 0 !important;
-  /* 上下内边距须与代码列 pre 保持一致（1rem），否则行号与代码逐行错位 */
-  padding: 1rem 0 !important;
+  /* 右侧 1ch = 一个空格宽度，与分隔线隔开 */
+  padding: 16px 1ch 16px 0.35rem !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
   background: transparent !important;
   border: 0 !important;
   overflow: visible;
+  color: var(--code-muted) !important;
+  text-align: right !important;
 }
 .code-block td.code {
   vertical-align: top;
-  padding: 0;
+  padding: 0 !important;
+  border: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  background: transparent !important;
+}
+.code-block td.code pre {
+  margin: 0 !important;
+  padding: 16px 14px 16px 0.5rem !important;
+  background: transparent !important;
+  border: 0 !important;
 }
 
-/* ---------- 深色模式 ---------- */
+/* ---------- 深色模式下保持一致的深色风格 ---------- */
 body.DarkMode .code-block {
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: var(--code-border) !important;
 }
 body.DarkMode .code-block__body {
-  background: #0d1117; /* 代码面板底色（深色） */
+  background: var(--code-bg) !important;
 }
 body.DarkMode .code-block__bar {
-  background: rgba(255, 255, 255, 0.07);
-  border-bottom-color: rgba(255, 255, 255, 0.16);
+  background: var(--code-bg-bar) !important;
+  border-bottom-color: var(--code-border) !important;
 }
 body.DarkMode .code-block td.gutter {
-  border-right-color: rgba(255, 255, 255, 0.16);
+  border-right-color: var(--code-border) !important;
+}
+body.DarkMode .code-block td.code,
+body.DarkMode .code-block figure.highlight td,
+body.DarkMode .code-block figure.highlight table {
+  border: 0 !important;
 }
 body.DarkMode .code-block__copy {
-  border-color: rgba(255, 255, 255, 0.28);
+  border-color: var(--code-border) !important;
 }
 body.DarkMode .code-block__toggle {
-  border-top-color: rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.05);
+  border-top-color: var(--code-border) !important;
+  background: var(--code-bg-toggle) !important;
 }
 
 /* ---------- 响应式 ---------- */

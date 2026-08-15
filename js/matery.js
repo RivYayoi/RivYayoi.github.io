@@ -1,14 +1,11 @@
 $(function () {
     /**
-     * 添加文章卡片hover效果.
+     * 文章卡片 hover 效果（现代 CSS transition 化：由 CSS 统一驱动，
+     * 这里仅保留兼容旧卡片的无动画版本）.
      */
     let articleCardHover = function () {
-        let animateClass = 'animated pulse';
-        $('article .article').hover(function () {
-            $(this).addClass(animateClass);
-        }, function () {
-            $(this).removeClass(animateClass);
-        });
+        // 现代文章卡片 (.article--row) 的过渡、缩放、投影完全由 CSS 控制，
+        // 不再添加 animate.css 的 pulse 跳弹动画，避免突兀.
     };
     articleCardHover();
 
@@ -57,16 +54,57 @@ $(function () {
         fixStyles();
     });
 
-    /*初始化瀑布流布局*/
-    $('#articles').masonry({
-        itemSelector: '.article'
-    });
+    /*单列列表布局不再需要瀑布流（masonry 会导致水平卡片高度抖动）；
+      仅在存在 .article-row--grid 多列网格时才启用*/
+    if ($('#articles .article-row--grid').length) {
+        $('#articles').masonry({
+            itemSelector: '.article'
+        });
+    }
 
     AOS.init({
-        easing: 'ease-in-out-sine',
-        duration: 700,
-        delay: 100
+        // 现代动画：更快、更柔和的缓动，fade-up 更自然；
+        // 单张卡片的 CSS 会通过 --i 变量做 60ms 阶梯延迟，
+        // 因此这里只设置一个较小的基础 delay 避免重复叠加.
+        easing: 'ease-out-cubic',
+        duration: 460,
+        delay: 20,
+        once: true,
+        offset: 56,
+        disable: function () {
+            var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            return reduced;
+        }
     });
+
+    /**
+     * 现代卡片悬停：鼠标位置跟踪，让 ::before 光晕跟随指针
+     * （纯装饰性，reduced-motion 下通过 CSS 已隐藏 ::before）
+     */
+    var attachCardGlowTracking = function () {
+        var $cards = $('.article-card');
+        if ($cards.length === 0) return;
+        $cards.each(function () {
+            var card = this;
+            var rafId = null;
+            var $card = $(card);
+            $card.on('mousemove', function (e) {
+                if (rafId) return;
+                rafId = requestAnimationFrame(function () {
+                    var rect = card.getBoundingClientRect();
+                    var mx = ((e.clientX - rect.left) / rect.width) * 100;
+                    var my = ((e.clientY - rect.top) / rect.height) * 100;
+                    card.style.setProperty('--mx', mx + '%');
+                    card.style.setProperty('--my', my + '%');
+                    rafId = null;
+                });
+            });
+        });
+    };
+    if (window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+        // 仅支持真正 hover 的设备启用（触屏不做）
+        attachCardGlowTracking();
+    }
 
     /*文章内容详情的一些初始化特性*/
     let articleInit = function () {

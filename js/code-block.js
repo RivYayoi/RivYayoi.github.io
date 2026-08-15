@@ -227,13 +227,13 @@
       return;
     }
     toggle.hidden = false;
-    toggle.textContent = '展开';
+    toggle.textContent = '▾';
     body.classList.add('is-collapsed');
     toggle.setAttribute('aria-expanded', 'false');
     toggle.addEventListener('click', function () {
       var collapsed = body.classList.toggle('is-collapsed');
       toggle.setAttribute('aria-expanded', String(!collapsed));
-      toggle.textContent = collapsed ? '展开' : '收起';
+      toggle.textContent = collapsed ? '▾' : '▴';
     });
   }
 
