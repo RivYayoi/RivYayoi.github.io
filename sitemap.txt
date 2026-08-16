@@ -4,7 +4,6 @@ https://yayoi.top/posts/4b3a7441.html
 https://yayoi.top/tags/index.html
 https://yayoi.top/categories/index.html
 https://yayoi.top/articles/index.html
-https://yayoi.top/about/index1.html
 https://yayoi.top/
 https://yayoi.top/tags/git/
 https://yayoi.top/tags/Java/
