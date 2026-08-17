@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>【Java菜鸟日记2】java的ifelse嵌套练习1</title>
+      <link href="/posts/b78e807.html"/>
+      <url>/posts/b78e807.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="黑马程序员练习题跟做"><a href="#黑马程序员练习题跟做" class="headerlink" title="黑马程序员练习题跟做"></a>黑马程序员练习题跟做</h2><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>键盘录入任意三个大于零的小数，判断这三个数值构成什么类型的三角形</p><h2 id="审题"><a href="#审题" class="headerlink" title="审题"></a>审题</h2><p>根据题目，我们需要知道三角形的两边之和大于第三边，那么显而易见了，我需要根据逻辑运算判断他是普通三角形还是等边还是等腰三角形，并且使用短路逻辑运算符更加节省性能，直接上代码</p><h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> learn;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">sjxpd</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入第一边&quot;</span>);</span><br><span class="line">        <span class="type">double</span> <span class="variable">a</span> <span class="operator">=</span> sc.nextDouble();</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入第二边&quot;</span>);</span><br><span class="line">        <span class="type">double</span> <span class="variable">b</span> <span class="operator">=</span> sc.nextDouble();</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入第三边&quot;</span>);</span><br><span class="line">        <span class="type">double</span> <span class="variable">c</span> <span class="operator">=</span> sc.nextDouble();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (a + b &gt; c &amp;&amp; b + c &gt; a &amp;&amp; a + c &gt; b) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a == b &amp;&amp; b == c) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;等边三角形&quot;</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (a == b || a == c || b == c) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;等腰三角形&quot;</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;普通三角形&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;非三角形&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>坚持学习</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 菜鸟日记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【算法日记】1512. 好数对的数目</title>
+      <link href="/posts/9d2f17c3.html"/>
+      <url>/posts/9d2f17c3.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给你一个整数数组 <code>nums</code> 。</p><p>如果一组数字 <code>(i,j)</code> 满足 <code>nums[i]</code> &#x3D;&#x3D; <code>nums[j]</code> 且 <code>i</code> &lt; <code>j</code> ，就可以认为这是一组 <strong>好数对</strong> 。</p><p>返回好数对的数目。</p><h2 id="审题"><a href="#审题" class="headerlink" title="审题"></a>审题</h2><p> 注意到<code>nums[i]</code> &#x3D;&#x3D; <code>nums[j]</code> 且 <code>i</code> &lt; <code>j</code>，所以我的思路是<strong>暴力双循环</strong>枚举所有 (i, j) 组合，逐一判断<br> 外层循环i 从 0 遍历到 n-1，锁定左端点<br> 内层循环j 从 i+1 遍历到 n-1，锁定右端点，保证 i &lt; j<br> 判定条件nums[i] &#x3D;&#x3D; nums[j]，相等则 ans++<br> 最后将ans值返回</p><h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numIdenticalPairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.<span class="built_in">size</span>();++i)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = i + <span class="number">1</span> ;j &lt; nums.<span class="built_in">size</span>() ;++j)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i] == nums[j])&#123;</span><br><span class="line">                    ++ans;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>对于这个题目我仍需加强练习</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法日记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> c++ </tag>
+            
+            <tag> 算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【杂谈】关于学习使用git提交本站代码心得</title>
       <link href="/posts/4b3a7441.html"/>
       <url>/posts/4b3a7441.html</url>
