@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yayoi.top/about/index.html</loc>
+    
+    <lastmod>2026-08-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yayoi.top/posts/ca0c91b1.html</loc>
     
     <lastmod>2026-08-19</lastmod>
@@ -41,15 +50,6 @@
     <loc>https://yayoi.top/posts/9d2f17c3.html</loc>
     
     <lastmod>2026-08-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yayoi.top/about/index.html</loc>
-    
-    <lastmod>2026-08-16</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -124,20 +124,6 @@
   </url>
   
   <url>
-    <loc>https://yayoi.top/tags/c/</loc>
-    <lastmod>2026-08-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yayoi.top/tags/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2026-08-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://yayoi.top/tags/Java/</loc>
     <lastmod>2026-08-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -146,6 +132,20 @@
   
   <url>
     <loc>https://yayoi.top/tags/%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yayoi.top/tags/c/</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yayoi.top/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2026-08-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
