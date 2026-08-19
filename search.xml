@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Java菜鸟日记5】使用可变参数的找最大值</title>
+      <link href="/posts/ca0c91b1.html"/>
+      <url>/posts/ca0c91b1.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>继续跟练狂神java，学习可变参数和了解简单的排序</p><h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> learn;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">kbcs</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//调用方法</span></span><br><span class="line">        Valuemax(<span class="number">1</span>,<span class="number">2</span>,<span class="number">31</span>,<span class="number">4</span>,<span class="number">5</span>);</span><br><span class="line">        Valuemax(<span class="number">11</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>);</span><br><span class="line">        Valuemax();</span><br><span class="line">        Valuemax(<span class="number">11</span>,<span class="number">2</span>,<span class="number">33</span>,<span class="number">44</span>,<span class="number">55</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">Valuemax</span><span class="params">(<span class="type">double</span> ...number)</span>&#123;</span><br><span class="line"><span class="comment">//判断是否有数字</span></span><br><span class="line">         <span class="keyword">if</span> (number.length == <span class="number">0</span>)&#123;</span><br><span class="line">             System.out.println(<span class="string">&quot;无数字&quot;</span>);、</span><br><span class="line">             <span class="keyword">return</span>;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="type">double</span> <span class="variable">max</span> <span class="operator">=</span> number[<span class="number">0</span>];</span><br><span class="line">         <span class="comment">//排序</span></span><br><span class="line">    <span class="comment">// 遍历数组，找到最大值</span></span><br><span class="line">         <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; number.length; i++) &#123;</span><br><span class="line">             <span class="keyword">if</span>(number[i] &gt; max)&#123;</span><br><span class="line">                 max = number[i];</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         System.out.println(<span class="string">&quot;最大值为：&quot;</span> + max);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先了解到可变参数的语法<code>void foo(String... args);</code><br>然后定义含有可变参数的方法，首先在方法中判断是否有参数输入，如果没有参数直接跳过遍历数组，然后遍历数组每当数组一个值大于先前最大值直接替换当前的最大值。</p><h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">最大值为：31.0</span><br><span class="line">最大值为：11.0</span><br><span class="line">无数字</span><br><span class="line">最大值为：55.0</span><br></pre></td></tr></table></figure><h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><p>首先是对于基础的可变参数语法的学习，以及是对于简单遍历数组寻找最大值的收获</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 菜鸟日记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Java菜鸟日记4】简单的命令行传参</title>
       <link href="/posts/5e92fb0b.html"/>
       <url>/posts/5e92fb0b.html</url>
