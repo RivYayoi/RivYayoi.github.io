@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Java菜鸟日记4】简单的命令行传参</title>
+      <link href="/posts/5e92fb0b.html"/>
+      <url>/posts/5e92fb0b.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天跟着狂神继续学习java，跟着做了一个简单的命令行传参，自己练习练习</p><h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> learn;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">cmdcc</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; args.length; i++)&#123;</span><br><span class="line">            System.out.println(args[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>然后在资源管理器中打开<br>编译源文件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac cmdcc.java</span><br></pre></td></tr></table></figure><h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>返回上一级目录</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ../</span><br></pre></td></tr></table></figure><p>然后运行传入参数</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java learn.cmdcc js 666 777 888</span><br></pre></td></tr></table></figure><h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">js</span><br><span class="line">666</span><br><span class="line">777</span><br><span class="line">888</span><br></pre></td></tr></table></figure><p><strong>本期的内容基本简单，主要是练习练习操作过程以及熟悉命令行环境</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 菜鸟日记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Java菜鸟日记3】java的for循环练习打印乘法表和三角形</title>
       <link href="/posts/2075ccdc.html"/>
       <url>/posts/2075ccdc.html</url>
